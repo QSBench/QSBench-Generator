@@ -1,0 +1,7 @@
+qiskit>=1.2,<2.0
+qiskit-aer-gpu==0.15.1
+numpy
+pandas
+pyarrow
+tqdm
+rich
