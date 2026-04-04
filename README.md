@@ -1,4 +1,4 @@
-# QSBench
+# QSBench-Generator
 
 **QSBench** is a modern open-source synthetic quantum dataset generator designed for Quantum Machine Learning (QML), quantum benchmarking, noise robustness studies, and sim-to-real research.
 
