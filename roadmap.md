@@ -52,16 +52,13 @@
 
 - **Mathematical metrics**  
   For all circuits, a **fidelity** score will be computed under different noise models:
-  \[
-  F(\rho, \sigma) = \left(\mathrm{Tr}\sqrt{\sqrt{\rho}\,\sigma\,\sqrt{\rho}}\right)^2
-  \]
+
+![fidelity](https://i.imgur.com/dhEQZHR.png)
 
 - **Entropy-based indicators**  
   The datasets will also include **von Neumann entropy**:
-  \[
-  S(\rho) = -\mathrm{Tr}(\rho \ln \rho)
-  \]
-  This provides a more precise view of decoherence in thermodynamic noise models.
+
+![von Neumann entropy](https://i.imgur.com/bcUk5dF.png)
 
 ## Suggested positioning
 
