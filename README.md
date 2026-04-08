@@ -176,5 +176,13 @@ If you use QSBench in your work, please cite:
 
 ---
 
+## 💰 Support QSBench
+
+- [Giveth](https://giveth.io/project/qsbench)
+- USDT (TRC20): `TQcgRru2yjPjCtqDkHYMr5vsRcejbpk1zG`
+- TON: `UQCPgjp_yK9c-Wn_708xDR_DZ6Pi6DnfqXfQRqQcc9W7xD0f`
+
+---
+
 **Ready to generate your first quantum dataset?**
 Just run the Quick Start commands above.
