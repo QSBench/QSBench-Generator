@@ -1,19 +1,14 @@
-# These are supported funding model platforms
+# .github/FUNDING.yml
 github: false
 patreon: false
 open_collective: false
 ko_fi: false
 buy_me_a_coffee: false
 polar: false
-tidelift: false
-community_bridge: false
-liberapay: false
-issuehunt: false
-lfx_crowdfunding: false
-thanks_dev: false
 
-# Custom sponsorship URLs
+# Custom sponsorship links
 custom:
   - "https://giveth.io/project/qsbench"
+  - "https://ko-fi.com/qsbench"
   - "USDT (TRC20): TQcgRru2yjPjCtqDkHYMr5vsRcejbpk1zG"
   - "TON: UQCPgjp_yK9c-Wn_708xDR_DZ6Pi6DnfqXfQRqQcc9W7xD0f"
