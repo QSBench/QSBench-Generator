@@ -13,8 +13,8 @@ services:
     volumes:
       - ./out:/app/out
     environment:
-      NVIDIA_VISIBLE_DEVICES: all
-      NVIDIA_DRIVER_CAPABILITIES: compute,utility
-      QISKIT_AER_DEBUG: "1"
-      PYTHONUNBUFFERED: "1"
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - QISKIT_AER_DEBUG=1
+      - PYTHONUNBUFFERED=1
     command: ["sleep", "infinity"]

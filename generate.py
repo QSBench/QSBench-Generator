@@ -1,9 +1,8 @@
 """
-QSBench v5.1.0 — modular release generator with versioned output folders,
-metadata, schema, coverage, manifest, report, changelog, and data card.
+QSBench v5.1.0 — entry point
 """
 
-from generator.generator import DatasetGenerator
+from qsbench.generator import DatasetGenerator
 
 
 def main() -> None:

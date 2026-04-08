@@ -1,28 +1,31 @@
-# QSBench v5.1.0 with GPU support (CUDA 12.4)
+# Dockerfile for QSBench v5.1.0
 FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV CUDA_VISIBLE_DEVICES=0
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         python3 \
         python3-pip \
         python3-dev \
+        python3-venv \
         git \
         ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Upgrade pip and install dependencies
-COPY requirements.txt .
-RUN python3 -m pip install --upgrade pip setuptools wheel && \
-    python3 -m pip install --no-cache-dir -r requirements.txt
+RUN python3 -m pip install --upgrade pip setuptools wheel
 
-# Copy the rest of the application
-COPY . .
+COPY pyproject.toml .
 
-# Default command (override with --dataset-name etc.)
-CMD ["python3", "generate.py"]
+COPY qsbench ./qsbench
+
+COPY generate.py .
+
+RUN pip3 install --no-cache-dir -e ".[dev]"
+
+CMD ["python3", "-m", "qsbench.generate"]
