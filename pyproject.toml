@@ -26,7 +26,7 @@ classifiers = [
 
 dependencies = [
     "qiskit>=1.2,<2.0",
-    "qiskit-aer-gpu==0.15.1",
+    "qiskit-aer>=0.15.1,<0.18",
     "numpy>=1.26,<2.0",
     "pandas>=2.2,<3.0",
     "pyarrow>=23",
@@ -35,6 +35,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+gpu = [
+    "qiskit-aer-gpu>=0.15.1",
+    "qiskit-aer-gpu-cu11>=0.15.1 ; python_version < '3.13'",
+]
 dev = [
     "pytest>=9.0",
     "pytest-cov>=7.1",
@@ -77,3 +81,12 @@ warn_unused_configs = true
 addopts = "--cov=qsbench --cov-report=term-missing"
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+    "ignore:The property .*condition.* is deprecated",
+    "ignore:The class .*QFT.* is pending deprecation",
+    "ignore:The class .*RealAmplitudes.* is pending deprecation",
+    "ignore:The class .*TwoLocal.* is pending deprecation",
+    "ignore:The class .*NLocal.* is pending deprecation",
+]
