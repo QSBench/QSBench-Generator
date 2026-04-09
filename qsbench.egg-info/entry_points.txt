@@ -1,0 +1,2 @@
+[console_scripts]
+qsbench = qsbench.generate:main
