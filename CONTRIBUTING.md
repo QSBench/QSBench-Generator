@@ -22,7 +22,7 @@ We welcome contributions from researchers, engineers, students, and quantum enth
 
 ## Code of Conduct
 
-We follow the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).  
+We follow the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of-conduct/).  
 Be kind, respectful, and constructive.
 
 ---
@@ -67,15 +67,27 @@ cd QSBench-Generator
 python -m venv venv
 source venv/bin/activate
 
-# Install the package in editable mode with development dependencies
+# Install the package in editable mode with development dependencies (CPU version)
 pip install -e ".[dev]"
 ```
+
+### GPU support (optional)
+
+If you have a CUDA-compatible GPU and want to use GPU-accelerated simulation:
+```bash
+# GPU + dev dependencies
+pip install -e ".[gpu,dev]"
+```
+
+**Note:** `qiskit-aer-gpu` is now an optional dependency.
+The default installation (`.[dev]`) uses the CPU version of Aer, which works on any machine.
+Docker image (CUDA-based) continues to work as before.
 
 ---
 
 ## Workflow
 
-1. **Fork** the repository
+1. Fork the repository
 2. Create a feature branch:
 ```bash
 git checkout -b feature/awesome-new-noise-model
@@ -85,15 +97,16 @@ git checkout -b feature/awesome-new-noise-model
 5. Ensure linting and tests pass:
 ```bash
 make lint
-make test
+make testbash
 ```
 6. Commit using Conventional Commits
-7. Push and open a **Pull Request**
+7. Push and open a Pull Request
+
+---
 
 ## Commit Guidelines
 
 We use **Conventional Commits:**
-
 ```text
 <type>(<scope>): <description>
 
@@ -102,7 +115,7 @@ We use **Conventional Commits:**
 [optional footer]
 ```
 
-**Allowed types:**
+### Allowed types:
 
 - `feat` — new feature
 - `fix` — bug fix
@@ -118,15 +131,13 @@ Examples:
 - `fix(generator): correct split assignment for edge cases`
 - `docs: improve CONTRIBUTING.md`
 
----
-
-## Pull Request Guidelines
+### Pull Request Guidelines
 
 - **Title** should follow Conventional Commits style
 - **Description** must include:
-    - What was changed and why
-    - Related issue (if any)
-    - Testing done
+  - What was changed and why
+  - Related issue (if any)
+  - Testing done
 - One PR = one logical change
 - Keep PRs reasonably small
 - All tests must pass
@@ -143,6 +154,7 @@ Examples:
 - **Import sorting**: isort
 
 Run before committing:
+
 ```bash
 make format      # black + isort
 make lint        # ruff
@@ -155,10 +167,9 @@ make type-check  # mypy
 
 ```bash
 make test             # Run all tests
-make test-coverage    # Run tests with coverage report
 ```
 
-We aim for high test coverage on core modules (`generator`, `noise`, `storage`, `estimation`).
+We aim for high test coverage on core modules (`generator`, `noise`, `storage`, `estimation`, etc).
 
 ---
 
@@ -179,5 +190,3 @@ We aim for high test coverage on core modules (`generator`, `noise`, `storage`, 
 
 **Thank you for contributing to QSBench!**
 Together we are building better tools for the quantum machine learning community.
-
----
