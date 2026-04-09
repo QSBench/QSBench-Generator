@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List, Sequence, Tuple
+from collections.abc import Sequence
+from typing import Any
 
 import numpy as np
 from qiskit import QuantumCircuit
@@ -22,7 +23,7 @@ def build_observable_specs(
     n_qubits: int,
     observables: Sequence[str],
     observable_mode: str,
-) -> List[Tuple[str, Pauli]]:
+) -> list[tuple[str, Pauli]]:
     """Create (label, Pauli) pairs for global and/or per-qubit observables."""
     specs = []
     for obs in observables:
@@ -45,7 +46,7 @@ def build_observable_specs(
 
 
 def make_estimator(
-    backend_options: Dict[str, Any],
+    backend_options: dict[str, Any],
     default_precision: float,
     seed: int | None = None,
 ) -> EstimatorV2:
@@ -65,8 +66,8 @@ def make_estimator(
 
 def run_estimator_batch_v2(
     estimator: EstimatorV2,
-    circuits: List[QuantumCircuit],
-    observables: List[Pauli],
+    circuits: list[QuantumCircuit],
+    observables: list[Pauli],
 ) -> np.ndarray:
     """
     Run batch of circuits with the same observables.

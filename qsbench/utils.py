@@ -7,7 +7,7 @@ import json
 import re
 from importlib import metadata as importlib_metadata
 from pathlib import Path
-from typing import Any, Tuple
+from typing import Any
 
 import numpy as np
 
@@ -64,7 +64,7 @@ def build_dataset_name(
     return f"{family}-{group}-{version}"
 
 
-def build_release_paths(output_root: str | Path, dataset_name: str) -> Tuple[Path, Path]:
+def build_release_paths(output_root: str | Path, dataset_name: str) -> tuple[Path, Path]:
     """Return (release_dir, shards_dir) paths."""
     root = Path(output_root)
     release_dir = root / "releases" / dataset_name
@@ -76,7 +76,7 @@ def hash_circuit(
     circuit_signature: str, seed: int, circuit_type: str, depth: int, n_qubits: int
 ) -> str:
     """Generate a short SHA-256 hash of circuit parameters."""
-    payload = f"{n_qubits}|{depth}|{circuit_type}|{seed}|{circuit_signature}".encode("utf-8")
+    payload = f"{n_qubits}|{depth}|{circuit_type}|{seed}|{circuit_signature}".encode()
     return hashlib.sha256(payload).hexdigest()[:16]
 
 

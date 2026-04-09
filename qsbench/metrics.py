@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import math
-from typing import Dict, List
 
 import numpy as np
 from qiskit import QuantumCircuit
@@ -19,7 +18,7 @@ def safe_qubit_index(qc: QuantumCircuit, qubit) -> int:
             return int(str(qubit).split("q[")[-1].split("]")[0])
 
 
-def get_adjacency_matrix(qc: QuantumCircuit, n_qubits: int) -> List[List[int]]:
+def get_adjacency_matrix(qc: QuantumCircuit, n_qubits: int) -> list[list[int]]:
     """Build adjacency matrix from CX gates."""
     adj = np.zeros((n_qubits, n_qubits), dtype=int)
 
@@ -47,7 +46,7 @@ def calculate_gate_entropy(qc: QuantumCircuit) -> float:
     return round(float(entropy), 6)
 
 
-def count_gates(qc: QuantumCircuit) -> Dict[str, int]:
+def count_gates(qc: QuantumCircuit) -> dict[str, int]:
     """Count various gate types in the circuit."""
     ops = qc.count_ops()
     total_gates = int(sum(ops.values()))

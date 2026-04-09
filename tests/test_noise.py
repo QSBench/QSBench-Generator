@@ -1,5 +1,6 @@
-from qsbench.noise import create_noise_model
 import pytest
+
+from qsbench.noise import create_noise_model
 
 
 @pytest.mark.parametrize(

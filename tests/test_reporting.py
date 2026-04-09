@@ -1,6 +1,7 @@
 import pandas as pd
 import pytest
-from qsbench.reporting import summarize_dataframe, build_release_changelog, build_data_card
+
+from qsbench.reporting import build_data_card, build_release_changelog, summarize_dataframe
 
 
 def test_summarize_dataframe():

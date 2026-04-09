@@ -1,5 +1,5 @@
 """
-QSBench v5.1.0 — modular release generator with versioned output folders,
+QSBench v5.2.0 — modular release generator with versioned output folders,
 metadata, schema, coverage, manifest, report, changelog, and data card.
 """
 
@@ -9,7 +9,7 @@ import argparse
 
 
 def parse_arguments() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="QSBench v5.1.0")
+    parser = argparse.ArgumentParser(description="QSBench v5.2.0")
     parser.add_argument("--n-qubits", type=int, default=14)
     parser.add_argument("--depth", type=int, default=10)
     parser.add_argument("--n-samples", type=int, default=1000)

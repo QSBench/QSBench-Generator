@@ -1,13 +1,13 @@
+import numpy as np
+from qiskit.quantum_info import Pauli
+from qiskit_aer.primitives import EstimatorV2
+
 from qsbench.estimation import (
-    build_pauli_string,
     build_observable_specs,
+    build_pauli_string,
     make_estimator,
     run_estimator_batch_v2,
 )
-import numpy as np
-from qiskit import QuantumCircuit
-from qiskit.quantum_info import Pauli
-from qiskit_aer.primitives import EstimatorV2
 
 
 def test_build_pauli_string():

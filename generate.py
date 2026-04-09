@@ -1,5 +1,5 @@
 """
-QSBench v5.1.0 — entry point
+QSBench v5.2.0 — entry point
 """
 
 from qsbench.generator import DatasetGenerator

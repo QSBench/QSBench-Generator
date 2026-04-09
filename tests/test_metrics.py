@@ -1,12 +1,12 @@
-from qsbench.metrics import (
-    safe_qubit_index,
-    get_adjacency_matrix,
-    calculate_gate_entropy,
-    count_gates,
-    calculate_meyer_wallach,
-)
 from qiskit import QuantumCircuit
-import pytest
+
+from qsbench.metrics import (
+    calculate_gate_entropy,
+    calculate_meyer_wallach,
+    count_gates,
+    get_adjacency_matrix,
+    safe_qubit_index,
+)
 
 
 def test_safe_qubit_index_all_fallbacks(small_circuit):

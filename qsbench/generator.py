@@ -7,12 +7,11 @@ import platform
 import sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any
 
 import numpy as np
 import pandas as pd
 from qiskit import QuantumCircuit
-from qiskit.quantum_info import Pauli
 from qiskit_aer import AerSimulator
 from rich.console import Console
 from rich.table import Table
@@ -21,7 +20,12 @@ from tqdm import tqdm
 from .config import parse_arguments
 from .estimation import build_observable_specs, make_estimator, run_estimator_batch_v2
 from .generation import generate_circuit, transpile_for_dataset
-from .metrics import calculate_gate_entropy, calculate_meyer_wallach, count_gates, get_adjacency_matrix
+from .metrics import (
+    calculate_gate_entropy,
+    calculate_meyer_wallach,
+    count_gates,
+    get_adjacency_matrix,
+)
 from .noise import create_noise_model
 from .reporting import build_data_card, build_release_changelog, summarize_dataframe, update_counter
 from .storage import write_parquet_shard
@@ -47,7 +51,7 @@ class DatasetGenerator:
         if not getattr(self.args, "dataset_name", None):
             raise ValueError("--dataset-name is required")
         self.dataset_name = self.args.dataset_name
-        self.dataset_version = getattr(self.args, "dataset_version", "v5.1.0")
+        self.dataset_version = getattr(self.args, "dataset_version", "v5.2.0")
         self.use_gpu = parse_bool(self.args.use_gpu)
         self._init_simulator()
         if not math.isclose(
@@ -151,8 +155,8 @@ class DatasetGenerator:
         log_path = release_dir / "generation_log.json"
 
         total_rows_written = 0
-        shard_manifest: List[Dict[str, Any]] = []
-        coverage: Dict[str, Dict[str, int]] = {
+        shard_manifest: list[dict[str, Any]] = []
+        coverage: dict[str, dict[str, int]] = {
             "split": {},
             "circuit_type_resolved": {},
             "circuit_type_requested": {},
@@ -162,7 +166,7 @@ class DatasetGenerator:
             "precision_mode": {},
             "observable_mode": {},
         }
-        all_sample_summaries: List[Dict[str, Any]] = []
+        all_sample_summaries: list[dict[str, Any]] = []
 
         batch_size = max(1, self.args.shard_size)
 
@@ -273,7 +277,7 @@ class DatasetGenerator:
         df_preview = pd.DataFrame(all_sample_summaries)
 
         meta = {
-            "generator_version": "v5.1.0",
+            "generator_version": "v5.2.0",
             "dataset_version": self.dataset_version,
             "parameters": {
                 "n_qubits": self.args.n_qubits,

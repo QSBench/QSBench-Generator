@@ -1,10 +1,11 @@
 import tempfile
 from pathlib import Path
-import pytest
-import pandas as pd
-from qsbench.generator import DatasetGenerator
-from qsbench.config import parse_arguments
 from unittest.mock import patch
+
+import pandas as pd
+
+from qsbench.config import parse_arguments
+from qsbench.generator import DatasetGenerator
 
 
 def test_dataset_generator_small_run():

@@ -1,14 +1,16 @@
 # tests/test_utils.py
+import json
+
+import numpy as np
+
 from qsbench.utils import (
-    sanitize_slug,
+    NumpyEncoder,
     build_dataset_name,
     hash_circuit,
-    split_name_from_hash,
     parse_bool,
-    NumpyEncoder,
+    sanitize_slug,
+    split_name_from_hash,
 )
-import json
-import numpy as np
 
 
 def test_sanitize_slug_edge_cases():

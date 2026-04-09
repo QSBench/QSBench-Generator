@@ -1,6 +1,7 @@
-from qsbench.config import parse_arguments
 import sys
 from unittest.mock import patch
+
+from qsbench.config import parse_arguments
 
 
 def test_parse_arguments_defaults():

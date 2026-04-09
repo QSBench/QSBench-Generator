@@ -1,15 +1,15 @@
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Any
 
 import pandas as pd
 
 
-def summarize_dataframe(df: pd.DataFrame) -> Dict[str, Any]:
+def summarize_dataframe(df: pd.DataFrame) -> dict[str, Any]:
     """Generate summary statistics from a DataFrame."""
-    summary: Dict[str, Any] = {
-        "rows": int(len(df)),
-        "columns": int(len(df.columns)),
+    summary: dict[str, Any] = {
+        "rows": len(df),
+        "columns": len(df.columns),
     }
     for col in ["ideal_expval_Z_global", "noisy_expval_Z_global", "error_Z_global"]:
         if col in df.columns:
@@ -25,7 +25,7 @@ def summarize_dataframe(df: pd.DataFrame) -> Dict[str, Any]:
 
 
 def update_counter(
-    counter: Dict[str, Dict[str, int]], key: str, value: str, amount: int = 1
+    counter: dict[str, dict[str, int]], key: str, value: str, amount: int = 1
 ) -> None:
     """Increment a counter for a given key-value pair."""
     if key not in counter:
@@ -34,7 +34,7 @@ def update_counter(
 
 
 def build_release_changelog(
-    meta: Dict[str, Any], report: Dict[str, Any], coverage: Dict[str, Dict[str, int]]
+    meta: dict[str, Any], report: dict[str, Any], coverage: dict[str, dict[str, int]]
 ) -> str:
     """Create a CHANGELOG.md entry for the release."""
     group = meta.get("dataset_group", "Custom")
@@ -99,8 +99,8 @@ def build_data_card(
     shard_count: int,
     shard_dir_name: str,
     files: list[str],
-    report: Dict[str, Any] | None = None,
-    coverage: Dict[str, Dict[str, int]] | None = None,
+    report: dict[str, Any] | None = None,
+    coverage: dict[str, dict[str, int]] | None = None,
     noise_params: dict | None = None,
 ) -> str:
     """Build a Markdown data card describing the dataset."""

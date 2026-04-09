@@ -1,4 +1,4 @@
-# Dockerfile for QSBench v5.1.0
+# Dockerfile for QSBench v5.2.0
 FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive

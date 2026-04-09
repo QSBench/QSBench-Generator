@@ -1,12 +1,13 @@
+from qiskit import QuantumCircuit
+
 from qsbench.generation import (
-    generate_random_circuit,
-    generate_qft_circuit,
-    generate_hea_circuit,
-    generate_real_amplitudes_circuit,
     generate_circuit,
+    generate_hea_circuit,
+    generate_qft_circuit,
+    generate_random_circuit,
+    generate_real_amplitudes_circuit,
     transpile_for_dataset,
 )
-from qiskit import QuantumCircuit
 
 
 def test_generate_random_circuit():
