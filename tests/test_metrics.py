@@ -17,6 +17,7 @@ def test_safe_qubit_index_all_fallbacks(small_circuit):
     # Test fallbacks
     class DummyQubit:
         _index = 1
+
     assert safe_qubit_index(qc, DummyQubit()) == 1
 
 

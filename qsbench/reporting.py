@@ -44,15 +44,9 @@ def build_release_changelog(
     families = report.get("families", {})
     splits = report.get("splits", {})
     families_text = (
-        ", ".join([f"{k} ({v})" for k, v in sorted(families.items())])
-        if families
-        else "n/a"
+        ", ".join([f"{k} ({v})" for k, v in sorted(families.items())]) if families else "n/a"
     )
-    splits_text = (
-        ", ".join([f"{k} ({v})" for k, v in sorted(splits.items())])
-        if splits
-        else "n/a"
-    )
+    splits_text = ", ".join([f"{k} ({v})" for k, v in sorted(splits.items())]) if splits else "n/a"
     lines = [
         f"# {release_name} CHANGELOG",
         "",

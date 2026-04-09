@@ -32,9 +32,7 @@ def build_observable_specs(
             continue
 
         if observable_mode in {"global", "mixed"}:
-            specs.append(
-                (f"{obs}_global", Pauli(build_pauli_string(obs, n_qubits)))
-            )
+            specs.append((f"{obs}_global", Pauli(build_pauli_string(obs, n_qubits))))
 
         if observable_mode in {"per_qubit", "mixed"}:
             for q in range(n_qubits):

@@ -5,14 +5,16 @@ from qsbench.reporting import build_data_card, build_release_changelog, summariz
 
 
 def test_summarize_dataframe():
-    df = pd.DataFrame({
-        "ideal_expval_Z_global": [0.5, 0.6, -0.1],
-        "noisy_expval_Z_global": [0.4, 0.55, -0.05],
-        "error_Z_global": [0.1, 0.05, -0.05],
-        "circuit_hash": ["a", "b", "c"],
-        "circuit_type_resolved": ["hea", "hea", "qft"],
-        "split": ["train", "val", "test"],
-    })
+    df = pd.DataFrame(
+        {
+            "ideal_expval_Z_global": [0.5, 0.6, -0.1],
+            "noisy_expval_Z_global": [0.4, 0.55, -0.05],
+            "error_Z_global": [0.1, 0.05, -0.05],
+            "circuit_hash": ["a", "b", "c"],
+            "circuit_type_resolved": ["hea", "hea", "qft"],
+            "split": ["train", "val", "test"],
+        }
+    )
     summary = summarize_dataframe(df)
     assert summary["rows"] == 3
     assert summary["columns"] == 6
@@ -40,7 +42,12 @@ def test_build_release_changelog():
         ("depolarizing", 0.01, {}, "depolarizing-noise robustness benchmark"),
         ("amplitude_damping", 0.02, {}, "amplitude-damping robustness benchmark"),
         ("phase_damping", 0.03, {}, "phase-damping robustness benchmark"),
-        ("thermal_relaxation", 0.01, {"t1": 50e-6, "t2": 30e-6}, "thermal-relaxation robustness benchmark"),
+        (
+            "thermal_relaxation",
+            0.01,
+            {"t1": 50e-6, "t2": 30e-6},
+            "thermal-relaxation robustness benchmark",
+        ),
         ("phase_amplitude_damping", 0.01, {}, "phase+amplitude damping robustness benchmark"),
         ("readout", 0.01, {"p0": 0.02, "p1": 0.015}, "readout-error robustness benchmark"),
         ("device", 0.0, {}, "device-like noise robustness benchmark"),

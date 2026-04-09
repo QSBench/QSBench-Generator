@@ -66,7 +66,9 @@ class DatasetGenerator:
         """Detect GPU availability and set precision mode."""
         try:
             sim = AerSimulator()
-            self.gpu_available = "gpu" in sim.available_devices() or "GPU" in sim.available_devices()
+            self.gpu_available = (
+                "gpu" in sim.available_devices() or "GPU" in sim.available_devices()
+            )
             self.available_devices = sim.available_devices()
         except Exception:
             self.gpu_available = False
@@ -90,8 +92,14 @@ class DatasetGenerator:
             self.args.seed = int(np.random.default_rng().integers(0, 2**32 - 1))
         np.random.seed(self.args.seed)
 
-        observable_bases = [obs.strip().upper() for obs in self.args.observable.split(",") if obs.strip()]
-        noise_str = f"{self.args.noise}({self.args.noise_prob})" if self.args.noise != "none" else "none(0.0)"
+        observable_bases = [
+            obs.strip().upper() for obs in self.args.observable.split(",") if obs.strip()
+        ]
+        noise_str = (
+            f"{self.args.noise}({self.args.noise_prob})"
+            if self.args.noise != "none"
+            else "none(0.0)"
+        )
 
         console.print(f"[bold cyan]🚀 QSBench {self.dataset_version}[/bold cyan]")
         console.print(
@@ -113,7 +121,11 @@ class DatasetGenerator:
         }
 
         noise_params_dict = {}
-        if hasattr(self.args, "noise_params") and self.args.noise_params and self.args.noise_params != "{}":
+        if (
+            hasattr(self.args, "noise_params")
+            and self.args.noise_params
+            and self.args.noise_params != "{}"
+        ):
             try:
                 noise_params_dict = json.loads(self.args.noise_params)
             except Exception:
@@ -128,10 +140,16 @@ class DatasetGenerator:
         if noise_model is not None:
             noisy_backend_options["noise_model"] = noise_model
 
-        ideal_estimator = make_estimator(ideal_backend_options, default_precision=0.0, seed=self.args.seed)
-        noisy_default_precision = 0.0 if self.args.shots is None else 1.0 / math.sqrt(self.args.shots)
+        ideal_estimator = make_estimator(
+            ideal_backend_options, default_precision=0.0, seed=self.args.seed
+        )
+        noisy_default_precision = (
+            0.0 if self.args.shots is None else 1.0 / math.sqrt(self.args.shots)
+        )
         noisy_estimator = make_estimator(
-            noisy_backend_options, default_precision=noisy_default_precision, seed=self.args.seed + 99991
+            noisy_backend_options,
+            default_precision=noisy_default_precision,
+            seed=self.args.seed + 99991,
         )
 
         observable_specs = build_observable_specs(
@@ -204,7 +222,11 @@ class DatasetGenerator:
                     "circuit_type_requested": self.args.circuit_type,
                     "n_qubits": self.args.n_qubits,
                     "depth": self.args.depth,
-                    "entanglement": self.args.entanglement if resolved_type in {"hea", "efficient", "real_amplitudes"} else None,
+                    "entanglement": (
+                        self.args.entanglement
+                        if resolved_type in {"hea", "efficient", "real_amplitudes"}
+                        else None
+                    ),
                     "qasm_raw": raw_qasm,
                     "qasm_transpiled": transpiled_qasm,
                     "adjacency": get_adjacency_matrix(qc_t, self.args.n_qubits),
@@ -269,12 +291,24 @@ class DatasetGenerator:
             shard_df = pd.DataFrame(rows)
             shard_name = f"{self.dataset_name}_shard{shard_index:05d}.parquet"
             shard_path = shards_dir / shard_name
-            shard_info = write_parquet_shard(shard_df, shard_path, write_csv=bool(self.args.write_csv))
-            shard_info.update({"shard_index": shard_index, "start": start, "end": start + len(rows)})
+            shard_info = write_parquet_shard(
+                shard_df, shard_path, write_csv=bool(self.args.write_csv)
+            )
+            shard_info.update(
+                {"shard_index": shard_index, "start": start, "end": start + len(rows)}
+            )
             shard_manifest.append(shard_info)
             total_rows_written += len(shard_df)
 
         df_preview = pd.DataFrame(all_sample_summaries)
+
+        report: dict[str, Any] = (
+            summarize_dataframe(df_preview) if not df_preview.empty else {"rows": 0}
+        )
+        report["dataset_version"] = self.dataset_version
+        report["shards"] = len(shard_manifest)
+        report["total_rows_written"] = total_rows_written
+        report["coverage"] = coverage
 
         meta = {
             "generator_version": "v5.2.0",
@@ -328,15 +362,45 @@ class DatasetGenerator:
         schema = {
             "dataset_version": self.dataset_version,
             "core_columns": [
-                "sample_id", "sample_seed", "circuit_hash", "split", "circuit_type_resolved",
-                "circuit_type_requested", "n_qubits", "depth", "entanglement", "qasm_raw",
-                "qasm_transpiled", "adjacency", "gate_entropy", "meyer_wallach", "noise_type",
-                "noise_prob", "observable_bases", "observable_mode", "shots", "gpu_requested",
-                "gpu_available", "backend_device", "precision_mode", "total_gates",
-                "single_qubit_gates", "two_qubit_gates", "cx_count", "h_count", "rx_count",
-                "ry_count", "rz_count",
+                "sample_id",
+                "sample_seed",
+                "circuit_hash",
+                "split",
+                "circuit_type_resolved",
+                "circuit_type_requested",
+                "n_qubits",
+                "depth",
+                "entanglement",
+                "qasm_raw",
+                "qasm_transpiled",
+                "adjacency",
+                "gate_entropy",
+                "meyer_wallach",
+                "noise_type",
+                "noise_prob",
+                "observable_bases",
+                "observable_mode",
+                "shots",
+                "gpu_requested",
+                "gpu_available",
+                "backend_device",
+                "precision_mode",
+                "total_gates",
+                "single_qubit_gates",
+                "two_qubit_gates",
+                "cx_count",
+                "h_count",
+                "rx_count",
+                "ry_count",
+                "rz_count",
             ],
-            "label_prefixes": ["ideal_expval_", "noisy_expval_", "error_", "sign_ideal_", "sign_noisy_"],
+            "label_prefixes": [
+                "ideal_expval_",
+                "noisy_expval_",
+                "error_",
+                "sign_ideal_",
+                "sign_noisy_",
+            ],
             "observable_mode": self.args.observable_mode,
             "observable_bases": observable_bases,
             "gate_basis": ["id", "x", "y", "z", "h", "rx", "ry", "rz", "cx"],
@@ -364,25 +428,37 @@ class DatasetGenerator:
             json.dump(coverage, f, indent=2, ensure_ascii=False, cls=NumpyEncoder)
 
         with open(manifest_path, "w", encoding="utf-8") as f:
-            json.dump({
-                "release_dir": str(release_dir),
-                "shards_dir": str(shards_dir),
-                "shards": shard_manifest,
-            }, f, indent=2, ensure_ascii=False, cls=NumpyEncoder)
+            json.dump(
+                {
+                    "release_dir": str(release_dir),
+                    "shards_dir": str(shards_dir),
+                    "shards": shard_manifest,
+                },
+                f,
+                indent=2,
+                ensure_ascii=False,
+                cls=NumpyEncoder,
+            )
 
         changelog = build_release_changelog(meta, report, coverage)
         changelog_path.write_text(changelog, encoding="utf-8")
 
         with open(log_path, "w", encoding="utf-8") as f:
-            json.dump({
-                "status": "success",
-                "num_samples": total_rows_written,
-                "num_shards": len(shard_manifest),
-                "backend_device": "GPU" if self.use_gpu else "CPU",
-                "gpu_available": self.gpu_available,
-                "gpu_requested": self.use_gpu,
-                "dataset_version": self.dataset_version,
-            }, f, indent=2, ensure_ascii=False, cls=NumpyEncoder)
+            json.dump(
+                {
+                    "status": "success",
+                    "num_samples": total_rows_written,
+                    "num_shards": len(shard_manifest),
+                    "backend_device": "GPU" if self.use_gpu else "CPU",
+                    "gpu_available": self.gpu_available,
+                    "gpu_requested": self.use_gpu,
+                    "dataset_version": self.dataset_version,
+                },
+                f,
+                indent=2,
+                ensure_ascii=False,
+                cls=NumpyEncoder,
+            )
 
         data_card = build_data_card(
             dataset_name=self.dataset_name,
@@ -406,9 +482,14 @@ class DatasetGenerator:
             shard_count=len(shard_manifest),
             shard_dir_name=shards_dir.name,
             files=[
-                meta_path.name, schema_path.name, coverage_path.name,
-                manifest_path.name, report_path.name, data_card_path.name,
-                changelog_path.name, log_path.name,
+                meta_path.name,
+                schema_path.name,
+                coverage_path.name,
+                manifest_path.name,
+                report_path.name,
+                data_card_path.name,
+                changelog_path.name,
+                log_path.name,
             ],
             report=report,
             coverage=coverage,
@@ -416,7 +497,9 @@ class DatasetGenerator:
         )
         data_card_path.write_text(data_card, encoding="utf-8")
 
-        console.print(f"[bold green]✅ Dataset successfully created: {total_rows_written:,} rows[/bold green]")
+        console.print(
+            f"[bold green]✅ Dataset successfully created: {total_rows_written:,} rows[/bold green]"
+        )
         table = Table(title="✅ Dataset successfully created")
         table.add_column("File", style="cyan")
         table.add_column("Rows", style="green")

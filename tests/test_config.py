@@ -15,20 +15,35 @@ def test_parse_arguments_defaults():
 
 
 def test_parse_arguments_custom_values():
-    with patch.object(sys, "argv", [
-        "qsbench",
-        "--n-qubits", "6",
-        "--depth", "4",
-        "--n-samples", "32",
-        "--circuit-type", "hea",
-        "--noise", "thermal_relaxation",
-        "--noise-prob", "0.02",
-        "--observable", "X,Y",
-        "--observable-mode", "per_qubit",
-        "--shots", "2048",
-        "--use-gpu", "False",
-        "--dataset-name", "test_config",
-    ]):
+    with patch.object(
+        sys,
+        "argv",
+        [
+            "qsbench",
+            "--n-qubits",
+            "6",
+            "--depth",
+            "4",
+            "--n-samples",
+            "32",
+            "--circuit-type",
+            "hea",
+            "--noise",
+            "thermal_relaxation",
+            "--noise-prob",
+            "0.02",
+            "--observable",
+            "X,Y",
+            "--observable-mode",
+            "per_qubit",
+            "--shots",
+            "2048",
+            "--use-gpu",
+            "False",
+            "--dataset-name",
+            "test_config",
+        ],
+    ):
         args = parse_arguments()
         assert args.n_qubits == 6
         assert args.circuit_type == "hea"
@@ -42,5 +57,6 @@ def test_parse_arguments_main_call():
     with patch("qsbench.generator.DatasetGenerator") as mock_gen:
         with patch.object(sys, "argv", ["qsbench"]):
             from qsbench.config import main
+
             main()
             mock_gen.assert_called_once()
