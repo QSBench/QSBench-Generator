@@ -79,13 +79,16 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--train-frac", type=float, default=0.80)
     parser.add_argument("--val-frac", type=float, default=0.10)
     parser.add_argument("--test-frac", type=float, default=0.10)
-    parser.add_argument("--write-csv", action="store_true", help="Write CSV copies alongside parquet shards")
+    parser.add_argument(
+        "--write-csv", action="store_true", help="Write CSV copies alongside parquet shards"
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_arguments()
     from qsbench.generator import DatasetGenerator
+
     generator = DatasetGenerator(args)
     generator.run()
 

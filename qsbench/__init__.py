@@ -1,3 +1,1 @@
-__version__ = "5.1.0"
-
-from .generator import DatasetGenerator
+__version__ = "5.2.0"

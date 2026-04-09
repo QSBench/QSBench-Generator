@@ -14,7 +14,7 @@ from qsbench.noise import create_noise_model
         ("thermal_relaxation", 0.01, {"t1": 50e-6, "t2": 30e-6}, False),
         ("phase_amplitude_damping", 0.02, {"p_amp": 0.01, "p_phase": 0.015}, False),
         ("readout", 0.01, {"p0": 0.02, "p1": 0.015}, False),
-        ("device", 0.0, {}, True),      # ← исправлено: prob=0 → None (как в noise.py)
+        ("device", 0.0, {}, True),  # ← исправлено: prob=0 → None (как в noise.py)
         ("device", 0.01, {"n_qubits": 6}, False),
     ],
 )

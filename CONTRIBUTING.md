@@ -97,7 +97,7 @@ git checkout -b feature/awesome-new-noise-model
 5. Ensure linting and tests pass:
 ```bash
 make lint
-make testbash
+make test
 ```
 6. Commit using Conventional Commits
 7. Push and open a Pull Request
