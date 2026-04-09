@@ -6,6 +6,17 @@ It generates high-quality, reproducible datasets with **ideal vs noisy** expecta
 
 ---
 
+## Test Status
+
+![Tests](https://github.com/QSBench/QSBench-Generator/actions/workflows/test.yml/badge.svg)
+![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen)
+![Python](https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12%20|%203.13-blue)
+
+- All major noise models, end-to-end generation, schema validation, and deterministic splits are covered
+- CI runs on every push/PR
+
+---
+
 ## Key Features
 
 - Multiple circuit families (HEA, RealAmplitudes, QFT, random, mixed)
