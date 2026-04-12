@@ -1,4 +1,4 @@
-"""Common utilities for QSBench."""
+"""Common utilities."""
 
 from .common import (
     NumpyEncoder,
@@ -11,7 +11,7 @@ from .common import (
     split_name_from_hash,
 )
 
-__all__: list[str] = [
+__all__ = [
     "NumpyEncoder",
     "build_dataset_name",
     "hash_circuit",

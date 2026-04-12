@@ -1,3 +1,4 @@
+.coverage
 CONTRIBUTING.md
 Dockerfile
 LICENSE
@@ -27,6 +28,7 @@ RFCs/rfc_phase_1.md
 qsbench/__init__.py
 qsbench/config.py
 qsbench/estimation.py
+qsbench/exceptions.py
 qsbench/generation.py
 qsbench/generator.py
 qsbench/reporting.py
@@ -39,6 +41,7 @@ qsbench.egg-info/top_level.txt
 qsbench/__pycache__/__init__.cpython-313.pyc
 qsbench/__pycache__/config.cpython-313.pyc
 qsbench/__pycache__/estimation.cpython-313.pyc
+qsbench/__pycache__/exceptions.cpython-313.pyc
 qsbench/__pycache__/generation.cpython-313.pyc
 qsbench/__pycache__/generator.cpython-313.pyc
 qsbench/__pycache__/metrics.cpython-313.pyc
@@ -46,6 +49,22 @@ qsbench/__pycache__/noise.cpython-313.pyc
 qsbench/__pycache__/reporting.cpython-313.pyc
 qsbench/__pycache__/storage.cpython-313.pyc
 qsbench/__pycache__/utils.cpython-313.pyc
+qsbench/circuit/__init__.py
+qsbench/circuit/metrics.py
+qsbench/circuit/__pycache__/__init__.cpython-313.pyc
+qsbench/circuit/__pycache__/metrics.cpython-313.pyc
+qsbench/noise/__init__.py
+qsbench/noise/core.py
+qsbench/noise/__pycache__/__init__.cpython-313.pyc
+qsbench/noise/__pycache__/core.cpython-313.pyc
+qsbench/storage/__init__.py
+qsbench/storage/parquet.py
+qsbench/storage/__pycache__/__init__.cpython-313.pyc
+qsbench/storage/__pycache__/parquet.cpython-313.pyc
+qsbench/utils/__init__.py
+qsbench/utils/common.py
+qsbench/utils/__pycache__/__init__.cpython-313.pyc
+qsbench/utils/__pycache__/common.cpython-313.pyc
 tests/__init__.py
 tests/conftest.py
 tests/test_config.py
@@ -58,6 +77,7 @@ tests/test_reporting.py
 tests/test_storage.py
 tests/test_utils.py
 tests/__pycache__/__init__.cpython-313.pyc
+tests/__pycache__/conftest.cpython-313-pytest-8.4.2.pyc
 tests/__pycache__/conftest.cpython-313-pytest-9.0.3.pyc
 tests/__pycache__/test_config.cpython-313-pytest-9.0.3.pyc
 tests/__pycache__/test_estimation.cpython-313-pytest-9.0.3.pyc
