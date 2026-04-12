@@ -1,4 +1,4 @@
-"""Circuit-related functionality."""
+"""Circuit families and metrics."""
 
 from .metrics import (
     calculate_gate_entropy,
@@ -8,7 +8,7 @@ from .metrics import (
     safe_qubit_index,
 )
 
-__all__: list[str] = [
+__all__ = [
     "calculate_gate_entropy",
     "calculate_meyer_wallach",
     "count_gates",
