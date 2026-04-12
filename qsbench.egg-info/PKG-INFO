@@ -44,6 +44,18 @@ It generates high-quality, reproducible datasets with **ideal vs noisy** expecta
 
 ---
 
+## Test Status
+
+![Tests](https://github.com/QSBench/QSBench-Generator/actions/workflows/test.yml/badge.svg)
+![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen)
+![Python Versions](https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12%20|%203.13-blue)
+![License](https://img.shields.io/badge/license-Apache%202.0-blue)
+
+- All major noise models, end-to-end generation, schema validation, and deterministic splits are covered
+- CI runs on every push/PR
+
+---
+
 ## Key Features
 
 - Multiple circuit families (HEA, RealAmplitudes, QFT, random, mixed)
@@ -62,31 +74,57 @@ It generates high-quality, reproducible datasets with **ideal vs noisy** expecta
 
 ## Quick Start (Docker)
 
+### Via Docker (recommended)
+
 ```bash
-# 1. Clone and build
 git clone https://github.com/QSBench/QSBench-Generator.git
 cd QSBench-Generator
+
 docker compose build --no-cache
 
-# 2. Generate a test dataset
 docker compose run --rm quantum-gen \
   python3 generate.py \
-  --n-qubits 8 \
-  --depth 6 \
-  --n-samples 512 \
-  --circuit-type mixed \
-  --entanglement full \
-  --noise thermal_relaxation \
-  --noise-params '{"t1": 50e-6, "t2": 30e-6}' \
-  --observable "Z,X,Y" \
-  --observable-mode mixed \
-  --shots 1024 \
-  --use-gpu True \
-  --dataset-name qsb_core_test_v5.1 \
-  --output-root /app/out
+    --n-qubits 8 \
+    --depth 6 \
+    --n-samples 512 \
+    --circuit-type mixed \
+    --entanglement full \
+    --noise thermal_relaxation \
+    --noise-params '{"t1": 50e-6, "t2": 30e-6}' \
+    --observable "Z,X,Y" \
+    --observable-mode mixed \
+    --shots 1024 \
+    --use-gpu True \
+    --dataset-name qsb_core_test_v5.1 \
+    --output-root /app/out
 ```
 
 Results will appear in `./out/qsb_core_test_v5.1/`.
+
+### Local installation (for development)
+
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -e ".[dev]"          # CPU version
+# pip install -e ".[gpu,dev]"    # if there is CUDA
+```
+---
+
+## Development
+
+```bash
+make format      # black + isort
+make lint        # ruff
+make test        # pytest + coverage
+make test-coverage
+```
+
+Current development status:
+
+- Test coverage: 95%
+- All main modules have been tested
+- Python 3.10–3.13 support
 
 ---
 

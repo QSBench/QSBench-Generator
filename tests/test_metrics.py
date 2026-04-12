@@ -1,6 +1,6 @@
 from qiskit import QuantumCircuit
 
-from qsbench.metrics import (
+from qsbench.circuit.metrics import (
     calculate_gate_entropy,
     calculate_meyer_wallach,
     count_gates,
@@ -14,7 +14,6 @@ def test_safe_qubit_index_all_fallbacks(small_circuit):
     q0 = qc.qubits[0]
     assert safe_qubit_index(qc, q0) == 0
 
-    # Test fallbacks
     class DummyQubit:
         _index = 1
 
@@ -45,9 +44,8 @@ def test_count_gates_various():
 
 
 def test_calculate_meyer_wallach_large_and_fail():
-    qc = QuantumCircuit(14)  # >12 qubits → -1.0
+    qc = QuantumCircuit(14)
     assert calculate_meyer_wallach(qc) == -1.0
 
-    # Empty 2-qubit circuit → 0.0 (no except, so 0.0)
     qc_empty = QuantumCircuit(2)
     assert calculate_meyer_wallach(qc_empty) == 0.0

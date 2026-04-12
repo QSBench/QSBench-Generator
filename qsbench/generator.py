@@ -17,19 +17,21 @@ from rich.console import Console
 from rich.table import Table
 from tqdm import tqdm
 
-from .config import parse_arguments
-from .estimation import build_observable_specs, make_estimator, run_estimator_batch_v2
-from .generation import generate_circuit, transpile_for_dataset
-from .metrics import (
+from .circuit.metrics import (
     calculate_gate_entropy,
     calculate_meyer_wallach,
     count_gates,
     get_adjacency_matrix,
 )
-from .noise import create_noise_model
+
+# Updated imports after refactor
+from .config import parse_arguments
+from .estimation import build_observable_specs, make_estimator, run_estimator_batch_v2
+from .generation import generate_circuit, transpile_for_dataset
+from .noise.core import create_noise_model
 from .reporting import build_data_card, build_release_changelog, summarize_dataframe, update_counter
-from .storage import write_parquet_shard
-from .utils import (
+from .storage.parquet import write_parquet_shard
+from .utils.common import (
     NumpyEncoder,
     hash_circuit,
     package_version,

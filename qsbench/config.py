@@ -1,6 +1,5 @@
 """
-QSBench v5.2.0 — modular release generator with versioned output folders,
-metadata, schema, coverage, manifest, report, changelog, and data card.
+QSBench v5.3.0 — modular release generator
 """
 
 from __future__ import annotations
@@ -87,7 +86,7 @@ def parse_arguments() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_arguments()
-    from qsbench.generator import DatasetGenerator
+    from .generator import DatasetGenerator
 
     generator = DatasetGenerator(args)
     generator.run()

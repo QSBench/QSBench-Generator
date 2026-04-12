@@ -1,9 +1,9 @@
+import sys
 import tempfile
 from pathlib import Path
-import pytest
-import pandas as pd
-import sys
 from unittest.mock import patch
+
+import pandas as pd
 
 from qsbench.config import parse_arguments
 from qsbench.generator import DatasetGenerator
