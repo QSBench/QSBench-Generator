@@ -13,11 +13,14 @@ lint:
 type-check:
 	mypy qsbench
 
+# Главное изменение: всегда устанавливаем пакет перед тестами
 test:
+	pip install -e ".[dev]" --quiet
 	pytest
 
 test-coverage:
-	pytest --cov=qsbench --cov-report=term-missing
+	pip install -e ".[dev]" --quiet
+	pytest --cov=qsbench --cov-report=term-missing --cov-report=xml
 
 clean:
 	rm -rf __pycache__ .pytest_cache .coverage *.egg-info dist build

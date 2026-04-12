@@ -11,6 +11,18 @@ from qiskit_aer.noise import (
     thermal_relaxation_error,
 )
 
+# Public API
+NOISE_MODELS = [
+    "none",
+    "depolarizing",
+    "amplitude_damping",
+    "phase_damping",
+    "thermal_relaxation",
+    "phase_amplitude_damping",
+    "readout",
+    "device",
+]
+
 
 def create_noise_model(
     noise_type: str,

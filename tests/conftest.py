@@ -1,10 +1,11 @@
 import pytest
-from qiskit import QuantumCircuit
 
 
 @pytest.fixture(scope="session")
 def small_circuit():
     """A simple 2-qubit circuit for all tests"""
+    from qiskit import QuantumCircuit
+
     qc = QuantumCircuit(2)
     qc.h(0)
     qc.cx(0, 1)

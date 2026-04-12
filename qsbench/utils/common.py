@@ -6,7 +6,6 @@ import hashlib
 import json
 import re
 from importlib import metadata as importlib_metadata
-from pathlib import Path
 from typing import Any
 
 import numpy as np
@@ -16,9 +15,10 @@ class NumpyEncoder(json.JSONEncoder):
     """JSON encoder for NumPy types."""
 
     def default(self, obj: Any):
-        if isinstance(obj, (np.integer, np.int64)):
+        # Исправлено: современный синтаксис Union (X | Y) вместо (X, Y)
+        if isinstance(obj, np.integer | np.int64):
             return int(obj)
-        if isinstance(obj, (np.floating, np.float64)):
+        if isinstance(obj, np.floating | np.float64):
             return float(obj)
         if isinstance(obj, np.ndarray):
             return obj.tolist()
@@ -62,14 +62,6 @@ def build_dataset_name(
     if not version.startswith("v"):
         version = f"v{version}"
     return f"{family}-{group}-{version}"
-
-
-def build_release_paths(output_root: str | Path, dataset_name: str) -> tuple[Path, Path]:
-    """Return (release_dir, shards_dir) paths."""
-    root = Path(output_root)
-    release_dir = root / "releases" / dataset_name
-    shards_dir = release_dir / "shards"
-    return release_dir, shards_dir
 
 
 def hash_circuit(

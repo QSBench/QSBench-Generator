@@ -1,4 +1,3 @@
-# tests/test_utils.py
 import json
 
 import numpy as np
